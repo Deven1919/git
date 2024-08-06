@@ -92,7 +92,39 @@ while(currentNode){
  return false
 
 }
+remove(data){
+const removeNodes=function(node,data){
 
+    if(node ===null){
+        return null
+    }
+    if(data ===node.data){
+        if(node.left === null && node.right ===null){
+            return null
+        }
+
+        if(node.left === null){
+            return node.left
+        }
+        let tempNode=node.right
+        while(tempNode.left !==null){
+            tempNode=tempNode.left
+        }
+        node.data=tempNode.data
+        node.right=removeNodes(node,tempNode.data)
+        return node
+    }
+
+
+    else if(data< node.data){
+      node.left=removeNodes(node.left,data)
+    }else{
+        node.right=removeNodes(node.right,data)
+        return node;
+    }
+} 
+this.root=removeNodes(this.root,data)
+}
 
 
 }
